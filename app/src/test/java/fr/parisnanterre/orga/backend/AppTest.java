@@ -4,11 +4,14 @@
 package fr.parisnanterre.orga.backend;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+@SpringBootTest
 public class AppTest {
-    @Test public void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+
+    @Test public void checkApiRun() {
+        assertDoesNotThrow(() -> App.main(new String[] {}));
     }
 }
