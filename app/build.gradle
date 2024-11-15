@@ -8,6 +8,31 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'jacoco'
+    id "org.sonarqube" version "5.1.0.4882"
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "DaJaime_BackendApp"
+        property "sonar.organization", "dajaime-github"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.12" // JaCoCo version
+}
+
+jacocoTestReport {
+    reports {
+        xml.required.set(true) // Necessary for badge services to read reports
+        html.required.set(true)
+    }
+}
+
+test {
+    finalizedBy jacocoTestReport // Generates JaCoCo report after testing
 }
 
 repositories {
@@ -23,10 +48,10 @@ dependencies {
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
-    java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
-        }
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 group = 'fr.parisnanterre.orga'  // Group ID
